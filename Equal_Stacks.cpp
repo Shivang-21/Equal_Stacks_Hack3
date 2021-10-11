@@ -17,39 +17,29 @@ vector<string> split(const string &);
  */
 
 int equalStacks(vector<int> h1, vector<int> h2, vector<int> h3) {
-     int i,j;
-     int x=h1.size();
-     int y=h2.size();
-     int z=h3.size();
-     int a[x],b[y],c[z];
-     a[0]=h1[x-1];
-     b[0]=h2[y-1];
-     c[0]=h3[z-1];
-     map<int,int>mp;
-     mp[a[0]]++;mp[b[0]]++;mp[c[0]]++;
-     for(i=1;i<x;i++)
-     {
-         a[i]=a[i-1]+h1[x-i-1];
-         mp[a[i]]++;
-     }
-     for(i=1;i<y;i++)
-     {
-         b[i]=b[i-1]+h2[y-i-1];
-         mp[b[i]]++;
-     }
-     for(i=1;i<z;i++)
-     {
-         c[i]=c[i-1]+h3[z-i-1];
-         mp[c[i]]++;
-     }
-     
-     int ans=0;
-     for(auto x:mp)
-     {
-         if(x.second==3)
-             ans=max(ans,x.first);
-     }
-     return ans;
+    int n1=h1.size(),n2=h2.size(),n3=h3.size();
+    int sum1=accumulate(h1.begin(),h1.end(),0);
+    int sum2=accumulate(h2.begin(),h2.end(),0);
+    int sum3=accumulate(h3.begin(),h3.end(),0);
+    int i=0,j=0,k=0,flag=0;
+    while(sum1!=sum2 || sum2!=sum3)
+    {
+        int m=max(max(sum1,sum2),sum3);
+        //cout<<sum1<<" "<<sum2<<" "<<sum3<<"\n";
+        if(m==sum1)
+        {
+            sum1-=h1[i++];
+        }
+        if(m==sum2)
+        {
+            sum2-=h2[j++];            
+        }
+        if(m==sum3)
+        {
+            sum3-=h3[k++];
+        }                  
+    }    
+    return sum1;  
 }
 
 int main()
