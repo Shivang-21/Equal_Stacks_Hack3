@@ -1,20 +1,11 @@
 #include <bits/stdc++.h>
-
+#include<iostream.h>
+#include<algorithms.h>
 using namespace std;
 
 string ltrim(const string &);
 string rtrim(const string &);
 vector<string> split(const string &);
-
-/*
- * Complete the 'equalStacks' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER_ARRAY h1
- *  2. INTEGER_ARRAY h2
- *  3. INTEGER_ARRAY h3
- */
 
 int equalStacks(vector<int> h1, vector<int> h2, vector<int> h3) {
     int n1=h1.size(),n2=h2.size(),n3=h3.size();
@@ -25,18 +16,20 @@ int equalStacks(vector<int> h1, vector<int> h2, vector<int> h3) {
     while(sum1!=sum2 || sum2!=sum3)
     {
         int m=max(max(sum1,sum2),sum3);
-        //cout<<sum1<<" "<<sum2<<" "<<sum3<<"\n";
         if(m==sum1)
         {
-            sum1-=h1[i++];
+            sum1-=h1[i];
+            i+=1;
         }
         if(m==sum2)
         {
-            sum2-=h2[j++];            
+            sum2-=h2[j];
+            j+=1;
         }
         if(m==sum3)
         {
-            sum3-=h3[k++];
+            sum3-=h3[k];
+            k+=1;
         }                  
     }    
     return sum1;  
